@@ -181,13 +181,19 @@ var _ = {};
   //     return total + number;
   //   }, 0); // should be 6
   _.reduce = function(collection, iterator, accumulator) {
-		var total = (typeof accumulator === "number" ? accumulator : 1);
+		var total = (accumulator !== undefined ? accumulator : 1);
 		
-		if (collection.length === 0) {
-			return 0;
+		if (Object.prototype.toString.call(collection) === "[object Object]") {
+			for (var key in collection) {
+				total = iterator(total, collection[key]);
+			}
 		} else {
-			return iterator(total, collection[0]) + _.reduce(collection.slice(1, collection.length), iterator, total);
+			for (var i = 0 ; i < collection.length ; i++) {
+				total = iterator(total, collection[i]);
+			}
 		}
+		
+		return total;
   };
 
   // Determine if the array or object contains a given value (using `===`).
