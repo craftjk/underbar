@@ -309,6 +309,7 @@ var _ = {};
       return result;
     };
   };
+	
 
   // Memoize an expensive function by storing its results. You may assume
   // that the function takes only one argument and that it is a primitive.
@@ -317,6 +318,18 @@ var _ = {};
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+		
+		var results = {};
+		var par;
+		
+		return function() {
+			if (results[arguments[0]] === undefined) {
+				results[arguments[0]] = func.apply(this, arguments);
+				par = arguments[0];
+			}
+			
+			return results[par];
+		}
   };
 
   // Delays a function for the given number of milliseconds, and then calls
