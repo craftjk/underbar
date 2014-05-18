@@ -156,9 +156,9 @@ var _ = {};
 		var result = [];
 		for (var i in collection) {
 			if (typeof functionOrKey === "string") {
-				for (var i = 0 ; i < collection.length ; i++) { 
-					
-				}
+        var str = "str";
+        var strFn = eval("str." + functionOrKey);
+        result.push(strFn.apply(collection[i]));
 			} else {
 				result.push(functionOrKey.apply(collection[i]));
 			}
