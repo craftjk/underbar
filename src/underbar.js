@@ -157,6 +157,7 @@ var _ = {};
 		for (var i in collection) {
 			if (typeof functionOrKey === "string") {
         var str = "str";
+        // this will only work with a string function
         var strFn = eval("str." + functionOrKey);
         result.push(strFn.apply(collection[i]));
 			} else {
@@ -359,7 +360,7 @@ var _ = {};
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
-		var copy = array.slice(0, array.length);
+		var copy = array.slice(0);
 		var shuffled = [];
 
 		while (copy.length > 0) {
